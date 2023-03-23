@@ -1,11 +1,12 @@
 {
-    "name": "ergrg",
+    "name": "phReader",
     "description": "",
     "dependencies": {
         "core": "*",
         "radio": "*",
         "microphone": "*",
-        "valon": "github:yfrobot-tm/pxt-yfrobot-valon#c1f9d01742cf7d7761d1714eecdd8527a1a45a5c"
+        "valon": "github:yfrobot-tm/pxt-yfrobot-valon#c1f9d01742cf7d7761d1714eecdd8527a1a45a5c",
+        "phReader": "github:georeleelkk/test#f3a978eb9226c56803ad1befe1b6a9f3483c9b97"
     },
     "files": [
         "main.blocks",

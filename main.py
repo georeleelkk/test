@@ -1,33 +1,19 @@
-_temperature      = 25.0
-_acidVoltage      = 2032.44
-_neutralVoltage   = 1500.0
+namespace Newman {
 
-voltat7 = 0
-vlotat4 = 0
+    export functon CalibrationAt_pH4(): number{
+        Voltage_At_pH4 = pins.analogReadPin(AnalogPin.P0) / 1024 * 5000
+    }
+    export functon CalibrationAt_pH7(): number{
+        Voltage_At_pH7 = pins.analogReadPin(AnalogPin.P0) / 1024 * 5000
+    }
+    export functon pHValue(acidVoltage: number, neutralVoltage: number): number{
+        let slope = 0;
+        let Numberercept=0;
+        let phValue;
 
-def on_button_pressed_a():
-    global vlotat4
-    basic.show_string("Cal mode")
-    basic.show_string("Ph4")
-    vlotat4 = pins.analog_read_pin(AnalogPin.P0) / 1024 * 5000
-input.on_button_pressed(Button.A, on_button_pressed_a)
-
-def on_button_pressed_b():
-    global voltat7
-    basic.show_string("Cal mode")
-    basic.show_string("Ph7")
-    voltat7 = pins.analog_read_pin(AnalogPin.P0) / 1024 * 5000
-input.on_button_pressed(Button.B, on_button_pressed_b)
-
-def read_PH(voltage,temperature):
-    global _acidVoltage
-    global _neutralVoltage
-    slope     = (7.0-4.0)/((_neutralVoltage-1500.0)/3.0 - (_acidVoltage-1500.0)/3.0)
-    intercept = 7.0 - slope*(_neutralVoltage-1500.0)/3.0
-    _phValue  = slope*(voltage-1500.0)/3.0+intercept
-    
-    return Math.round(_phValue)
-
-def on_button_pressed_ab():
-    read_PH(pins.analog_read_pin(AnalogPin.P0) / 1024 * 5000, input.temperature())
-input.on_button_pressed(Button.B, on_button_pressed_b)
+        slope = (7 - 4) / ((neutralVoltage - 1500) / 3 - (acidVoltage - 1500) / 3);
+        Numberercept = 7 - slope * (neutralVoltage - 1500) / 3;
+        phValue = slope * (voltage - 1500) / 3 + Numberercept;
+        return Math.round(phValue);
+    }
+}
